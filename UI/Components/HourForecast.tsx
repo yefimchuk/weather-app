@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-end",
     flex: 0.14,
+    marginTop: 40
   },
 });
 export default HourForecast;

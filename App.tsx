@@ -1,14 +1,13 @@
-import {ImageBackground, ScrollView} from "react-native";
-import { Provider } from "react-redux";
+import {ImageBackground, ScrollView, StyleSheet} from "react-native";
+import {Provider} from "react-redux";
 import store from "./BLL/store";
 // @ts-ignore
 import bgImg from "../weather-app/assets/backGround.png";
 import axios from "axios";
-import { NavigationContainer } from "@react-navigation/native";
+import {NavigationContainer} from "@react-navigation/native";
 import ForecastSearch from "./UI/Components/ForecastSearch";
 import CurrentForecast from "./UI/Components/CurrentForecast";
-import HourForecast from "./UI/Components/HourForecast";
-import DailyForecast from "./UI/Components/DailyForecast";
+import React from "react";
 
 export default function App() {
   axios.interceptors.request.use((config) => {
@@ -16,18 +15,17 @@ export default function App() {
     config.params.appid = "0f577827aaa34d864bd29dd15ee0e2b5";
     return config;
   });
+
   return (
     <Provider store={store}>
       <NavigationContainer>
         <ImageBackground
-          source={bgImg}
-          style={{ width: "100%", height: "100%" }}
+            source={bgImg}
+            style={{width: "100%", height: "100%"}}
         >
-          <ForecastSearch />
 
-            <CurrentForecast />
-            <HourForecast />
-            <DailyForecast />
+            <ForecastSearch/>
+            <CurrentForecast/>
 
 
         </ImageBackground>
@@ -35,3 +33,10 @@ export default function App() {
     </Provider>
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+
+    marginHorizontal: 16,
+  },
+});

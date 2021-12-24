@@ -1,10 +1,7 @@
 import React from "react";
-import {Image, ScrollView, StyleSheet, Text, View} from "react-native";
-import { useSelector } from "react-redux";
-import {
-  fetchDailyWeatherSelector,
-  fetchingSelector,
-} from "../../BLL/Weather/weather.selector";
+import {Image, SafeAreaView, ScrollView, SectionList, StyleSheet, Text, View} from "react-native";
+import {useSelector} from "react-redux";
+import {fetchDailyWeatherSelector, fetchingSelector,} from "../../BLL/Weather/weather.selector";
 import moment from "moment";
 
 const DailyForecast = () => {
@@ -12,8 +9,7 @@ const DailyForecast = () => {
   const isFetching = useSelector(fetchingSelector);
   console.log(dailyForecastData);
   return <View style={styles.dailyForecastData}>
-      <ScrollView style={styles.scroll} >
-        {dailyForecastData
+      {dailyForecastData
           ? dailyForecastData
               .filter((item: object, idx: number) => idx != 0)
               .map(
@@ -41,27 +37,44 @@ const DailyForecast = () => {
                       />
                     <View style={{flexDirection: "row", paddingRight: 10}}>
                       <Text style={styles.dailyForecastData__max}>
-                        {Math.round(key.temp.day) }
+                        {Math.round(key.temp.day)}
                       </Text>
                       <Text style={styles.dailyForecastData__min}>
-                        {Math.round(key.temp.min) }
+                        {Math.round(key.temp.min)}
                       </Text>
                     </View>
-
 
 
                   </View>
                 )
               )
           : null}
-      </ScrollView>
-    </View>
-  ;
+
+
+  </View>
+      ;
 };
 
 const styles = StyleSheet.create({
   scroll: {
     width: "95%",
+  },
+  container: {
+    flex: 1,
+
+    marginHorizontal: 16
+  },
+  item: {
+    backgroundColor: "#f9c2ff",
+    padding: 20,
+    marginVertical: 8
+  },
+  header: {
+    fontSize: 32,
+    backgroundColor: "#fff"
+  },
+  title: {
+    fontSize: 24
   },
   dailyForecastData__max: {
     fontSize: 18,
@@ -93,8 +106,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-end",
     flex: .3,
-
-    borderWidth:1
+    width: "95%",
   },
 });
 export default DailyForecast;

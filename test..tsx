@@ -1,31 +1,62 @@
 import React from "react";
-import {Button, StyleSheet, View} from "react-native";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchCoordinatesHandler, fetchWeatherByCoordinatesHandler,} from "./BLL/Weather/weather.slice";
-import {fetchWeatherDataSelector} from "./BLL/Weather/weather.selector";
+import { StyleSheet, Text, View, SafeAreaView, SectionList, StatusBar } from "react-native";
 
-let Test = () => {
-    let dispatch = useDispatch();
-    let onClick = async () => {
-
-        let response = await dispatch(fetchCoordinatesHandler("kyiv"));
-        dispatch(fetchWeatherByCoordinatesHandler(response.payload));
-    };
-    let data = useSelector(fetchWeatherDataSelector)
-    return (
-
-        <View style={styles.button}>
-            <Button title={"weather" + data} onPress={onClick}/>
-
-        </View>
-
-    );
-};
-export default Test;
-const styles = StyleSheet.create({
-    button: {
-
-        backgroundColor: "#ff1b1b",
-
+const DATA = [
+    {
+        title: "dima",
+        data: ["Pizza", "Burger", "Risotto"]
     },
+    {
+        title: "Sids",
+        data: ["French Fries", "Onion Rings", "Fried Shrimps"]
+    },
+    {
+        title: "Drinks",
+        data: ["Water", "Coke", "Beer"]
+    },
+    {
+        title: "Desserts",
+        data: ["Cheese Cake", "Ice Cream"]
+    }
+];
+
+const Item = ({ title } : any) => (
+    <View style={styles.item}>
+        <Text style={styles.title}>{title}</Text>
+    </View>
+);
+
+const Ddd = () => (
+    <SafeAreaView style={styles.container}>
+        <SectionList
+            sections={DATA}
+            keyExtractor={(item, index) => item + index}
+            renderItem={({ item }) => <Item title={item} />}
+            renderSectionHeader={({ section: { title } }) => (
+                <Text style={styles.header}>{title}</Text>
+            )}
+        />
+    </SafeAreaView>
+);
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingTop: StatusBar.currentHeight,
+        marginHorizontal: 16
+    },
+    item: {
+        backgroundColor: "#f9c2ff",
+        padding: 20,
+        marginVertical: 8
+    },
+    header: {
+        fontSize: 32,
+        backgroundColor: "#fff"
+    },
+    title: {
+        fontSize: 24
+    }
 });
+
+export default Ddd;

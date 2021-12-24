@@ -23,6 +23,10 @@ export const fetchWeatherDataSelector = createSelector(
     selectSelf,
     (state: any) => state.weatherSlice.weatherData
 );
+export const fetchCitySelector = createSelector(
+    selectSelf,
+    (state: any) => state.weatherSlice.weatherData.city
+);
 export const fetchingSelector = createSelector(
     selectSelf,
     (state: any) => state.weatherSlice.isFetching

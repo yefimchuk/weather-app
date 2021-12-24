@@ -1,11 +1,13 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
-import { useSelector } from "react-redux";
+import {Image, ScrollView, StyleSheet, Text, View} from "react-native";
+import {useSelector} from "react-redux";
 import {
   fetchCurrentWeatherSelector,
   fetchingSelector,
   fetchWeatherDataSelector,
 } from "../../BLL/Weather/weather.selector";
+import HourForecast from "./HourForecast";
+import DailyForecast from "./DailyForecast";
 
 const CurrentForecast = () => {
   const currentWeatherData = useSelector(fetchCurrentWeatherSelector);
@@ -13,36 +15,46 @@ const CurrentForecast = () => {
   const isFetching = useSelector(fetchingSelector);
 
   return (
-    <View style={styles.currentForecast}>
-      {!isFetching && (
-        <View>
-          {currentWeatherData.weather && (
-            <View style={styles.currentForecast__FlexCol}>
-              <Text style={styles.currentForecast__city}>
-                {weatherData.name}
-              </Text>
-              <View style={styles.currentForecast__FlexRow}>
-                <Image
-                  style={styles.currentForecast__img}
-                  source={{
-                    uri: `http://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}@2x.png`,
-                  }}
-                  resizeMode={"contain"}
-                />
-                <Text style={styles.currentForecast__description}>
-                  {currentWeatherData.weather[0].main}
-                </Text>
-              </View>
+      <View style={styles.currentForecast}>
+        {!isFetching && (
+            <View>
+              {currentWeatherData.weather && (
+                  <View style={styles.currentForecast__FlexCol}>
+                    <Text style={styles.currentForecast__city}>
+                      {weatherData.name}
+                    </Text>
+                    <View style={styles.currentForecast__FlexRow}>
+                      <Image
+                          style={styles.currentForecast__img}
+                          source={{
+                            uri: `http://openweathermap.org/img/wn/${currentWeatherData.weather[0].icon}@2x.png`,
+                          }}
+                          resizeMode={"contain"}
+                      />
+                      <Text style={styles.currentForecast__description}>
+                        {currentWeatherData.weather[0].main}
+                      </Text>
+                    </View>
 
-              <Text style={styles.currentForecast__degrees}>
-                {" " + Math.round(currentWeatherData.temp) + "°"}
-              </Text>
+                    <ScrollView>
+                      <View style={styles.currentForecast__FlexRow}>
+                        <Text style={styles.currentForecast__degrees}>
+                          {" " + Math.round(currentWeatherData.temp) + "°"}
+                        </Text>
+                      </View>
+                        <View style={styles.currentForecast__FlexRow}>
+                          <Text
+                              style={styles.currentForecast__hl}>{`H: ${Math.round(weatherData.main.temp_max)}°`}</Text>
+                          <Text
+                              style={styles.currentForecast__hl}>{`L: ${Math.floor(weatherData.main.temp_min)}°`}</Text>
+                        </View>
 
-              <View style={styles.currentForecast__FlexRow}>
-                <Text style={styles.currentForecast__hl}>{`H: ${Math.round(weatherData.main.temp_max)}°`}</Text>
-                <Text style={styles.currentForecast__hl}>{`L: ${Math.floor(weatherData.main.temp_min)}°`}</Text>
-              </View>
-            </View>
+                        <HourForecast/>
+                        <DailyForecast/>
+
+                  </ScrollView>
+
+                  </View>
           )}
         </View>
       )}
@@ -60,7 +72,7 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   currentForecast: {
-    flex: 0.4,
+    flex: .8,
 
     justifyContent: "flex-start",
     alignItems: "center",
@@ -69,20 +81,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
+
   },
   currentForecast__description: {
     color: "white",
     fontSize: 20,
+
   },
   currentForecast__city: {
-    fontSize: 45,
+    fontSize: 65,
     fontWeight: "300",
     color: "#FFFFFF",
   },
   currentForecast__degrees: {
     fontSize: 100,
     fontWeight: "200",
-
     color: "white",
   },
   currentForecast__FlexCol: {
