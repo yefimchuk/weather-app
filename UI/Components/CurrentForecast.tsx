@@ -34,7 +34,7 @@ const CurrentForecast = ({ scrolling }: any) => {
   });
   const scaleScrollView = scrollY.interpolate({
     inputRange: [0, 230],
-    outputRange: [0, -100],
+    outputRange: [0, -90],
     extrapolate: "clamp",
   });
   return (
@@ -88,7 +88,7 @@ const CurrentForecast = ({ scrolling }: any) => {
                 <Animated.ScrollView
                   style={{
                     width: "100%",
-                    borderWidth: 1,
+
                     height: 200,
                     transform: [
                       {

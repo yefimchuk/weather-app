@@ -62,6 +62,7 @@ export const weatherSlice: any = createSlice({
       state.isFetching = true;
     },
     [fetchCoordinatesHandler.fulfilled]: (state, action) => {
+
       state.weatherData = action.payload.data;
     },
     [fetchCoordinatesHandler.rejected]: (state, action) => {
@@ -70,8 +71,8 @@ export const weatherSlice: any = createSlice({
     },
     [fetchWeatherByCoordinatesHandler.pending]: (state, action) => {},
     [fetchWeatherByCoordinatesHandler.fulfilled]: (state, action) => {
-      state.isFetching = false;
 
+      state.isFetching = false;
       state.currentForecast = action.payload.current;
       state.hourlyForecast = action.payload.hourly;
       state.dailyForecast = action.payload.daily;

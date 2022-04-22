@@ -17,7 +17,6 @@ class WeatherService {
         lat: lat,
         lon: lon,
 
-        exclude: "",
         units: "metric",
       },
     });
