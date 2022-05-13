@@ -1,8 +1,28 @@
 import axios from "axios";
 
+
 class WeatherService {
-    FindByCity({city, limit}: any) {
-        return axios.get(`q=${city}`, );
+    FetchCoordinatesHandler(city: any) {
+
+        return axios.get(``, {
+            params: {
+                q: city,
+                limit: 5,
+
+            }
+
+        });
+    }
+
+    FetchWeatherByCoordinatesHandler({lat, lon}: any) {
+        return axios.get('', {
+            params: {
+                lat: lat,
+                lon: lon,
+                exclude: "hourly",
+                units: "metric"
+            }
+        })
     }
 
 }
