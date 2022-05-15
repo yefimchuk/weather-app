@@ -5,15 +5,18 @@ class WeatherService {
     return axios.get(`weather`, {
       params: {
         q: city,
+        units: "metric",
       },
     });
   }
 
-  FetchWeatherByCoordinatesHandler({ lat, lon }: any) {
+  FetchWeatherByCoordinatesHandler({ lon, lat }: any) {
+
     return axios.get(`onecall`, {
       params: {
         lat: lat,
         lon: lon,
+
         exclude: "",
         units: "metric",
       },
