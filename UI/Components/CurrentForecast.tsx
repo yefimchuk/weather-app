@@ -12,7 +12,7 @@ const CurrentForecast = () => {
 
   const weatherData = useSelector(fetchWeatherDataSelector);
   const isFetching = useSelector(fetchingSelector);
-  console.log(weatherData);
+
   return (
     <View style={styles.currentForecast}>
       {!isFetching && (
@@ -61,8 +61,9 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   currentForecast: {
-    flex: 0.2,
-    justifyContent: "center",
+    flex: 0.4,
+
+    justifyContent: "flex-start",
     alignItems: "center",
   },
   currentForecast__FlexRow: {

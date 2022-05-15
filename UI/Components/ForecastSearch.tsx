@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
   },
 
   forecastSearch: {
+
     flex: 0.26,
     justifyContent: "center",
     alignItems: "center",
