@@ -32,6 +32,11 @@
     "@react-navigation/native": "^6.0.10",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.66.13",
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
+    "@typescript-eslint/parser": "^5.23.0",
+    "eslint": "^8.15.0",
+    "eslint-plugin-react": "^7.29.4",
+    "prettier": "prettier",
     "typescript": "~4.3.5"
   },
   "private": true

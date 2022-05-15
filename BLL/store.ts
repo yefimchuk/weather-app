@@ -1,12 +1,16 @@
 
 import weatherSlice from "./Weather/weather.slice";
-import {configureStore} from "@reduxjs/toolkit";
+import {applyMiddleware, combineReducers, configureStore, createStore} from "@reduxjs/toolkit";
+import {composeWithDevTools} from "redux-devtools-extension";
+import thunk from "redux-thunk";
 
 
-export const store = configureStore({
-    reducer: {
-        weatherSlice
-    },
+let reducers = combineReducers({
+    weatherSlice
 });
 
+const store = createStore(
+    reducers,
+    composeWithDevTools(applyMiddleware(thunk))
+);
 export default store;

@@ -5,3 +5,8 @@ export const fetchCoordinatesHandlerSelector = createSelector(
     selectSelf,
     (state: any) => state.weatherSlice.coordinatesData
 );
+export const fetchWeatherDataSelector = createSelector(
+    selectSelf,
+    (state: any) => state.weatherSlice.weatherData
+);
+

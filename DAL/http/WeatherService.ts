@@ -1,31 +1,25 @@
 import axios from "axios";
 
-
 class WeatherService {
-    FetchCoordinatesHandler(city: any) {
+  FetchCoordinatesHandler(city: any) {
+    return axios.get(`weather`, {
+      params: {
+        q: city,
+      },
+    });
+  }
 
-        return axios.get(``, {
-            params: {
-                q: city,
-                limit: 5,
-
-            }
-
-        });
-    }
-
-    FetchWeatherByCoordinatesHandler({lat, lon}: any) {
-        return axios.get('', {
-            params: {
-                lat: lat,
-                lon: lon,
-                exclude: "hourly",
-                units: "metric"
-            }
-        })
-    }
-
+  FetchWeatherByCoordinatesHandler({ lat, lon }: any) {
+    return axios.get(`onecall`, {
+      params: {
+        lat: lat,
+        lon: lon,
+        exclude: "",
+        units: "metric",
+      },
+    });
+  }
 }
 
-const weatherServiceInstance = new WeatherService()
+const weatherServiceInstance = new WeatherService();
 export default weatherServiceInstance;
