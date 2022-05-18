@@ -1,13 +1,14 @@
-import {ImageBackground, KeyboardAvoidingView, StyleSheet} from "react-native";
-import {Provider} from "react-redux";
+import {ImageBackground, ScrollView} from "react-native";
+import { Provider } from "react-redux";
 import store from "./BLL/store";
 // @ts-ignore
 import bgImg from "../weather-app/assets/backGround.png";
 import axios from "axios";
-import {NavigationContainer} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import ForecastSearch from "./UI/Components/ForecastSearch";
 import CurrentForecast from "./UI/Components/CurrentForecast";
 import HourForecast from "./UI/Components/HourForecast";
+import DailyForecast from "./UI/Components/DailyForecast";
 
 export default function App() {
   axios.interceptors.request.use((config) => {
@@ -18,20 +19,19 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-          <ImageBackground
-              source={bgImg}
-              style={{width: "100%", height: "100%"}}
-          >
+        <ImageBackground
+          source={bgImg}
+          style={{ width: "100%", height: "100%" }}
+        >
+          <ForecastSearch />
 
-                  <ForecastSearch/>
-                  <CurrentForecast/>
-                  <HourForecast/>
+            <CurrentForecast />
+            <HourForecast />
+            <DailyForecast />
 
 
-
-          </ImageBackground>
+        </ImageBackground>
       </NavigationContainer>
     </Provider>
   );
 }
-

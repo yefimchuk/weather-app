@@ -9,7 +9,6 @@ import {
 
 const CurrentForecast = () => {
   const currentWeatherData = useSelector(fetchCurrentWeatherSelector);
-
   const weatherData = useSelector(fetchWeatherDataSelector);
   const isFetching = useSelector(fetchingSelector);
 
