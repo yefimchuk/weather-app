@@ -78,7 +78,7 @@ export const ItemInfo = ({
                            valueLeft,
                            valueRight,
                          }: any) => {
-  debugger;
+
 
   return (
       <View
