@@ -7,13 +7,22 @@ import {
 } from "../../BLL/Weather/weather.selector";
 import moment from "moment";
 
-const HourForecast = () => {
+const HourForecast = ({ scrolling }: any) => {
   const hourForecastData = useSelector(fetchHourlyWeatherSelector);
   const isFetching = useSelector(fetchingSelector);
 
   return !isFetching ? (
-    <View style={styles.hourForecast}>
-      <ScrollView horizontal={true} style={styles.scrollView}>
+    <View>
+      <ScrollView
+        horizontal={true}
+        style={{
+          margin: 15,
+          flexDirection: "row",
+          borderTopWidth: 1,
+          borderBottomWidth: 1,
+          borderColor: "rgba(220,220,220,0.71)",
+        }}
+      >
         {hourForecastData
           ? hourForecastData
               .filter((item: object, idx: number) => idx < 24)
@@ -70,15 +79,11 @@ const styles = StyleSheet.create({
     height: 40,
   },
   weather: {
-    marginLeft: 10,
+    marginTop: 7,
+    marginBottom: 7,
     justifyContent: "center",
     alignItems: "center",
   },
-  hourForecast: {
-    alignItems: "center",
-    justifyContent: "flex-end",
-    flex: 0.14,
-    marginTop: 40
-  },
+  hourForecast: {},
 });
 export default HourForecast;

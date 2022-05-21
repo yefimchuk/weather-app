@@ -12,9 +12,7 @@ const ForecastSearch = () => {
   };
   return (
     <View style={styles.forecastSearch}>
-      <View style={styles.forecastSearch__textFlex}>
-        <Text style={styles.forecastSearch__text}>Search by</Text>
-      </View>
+
 
       <TextInput
         onChangeText={SetCity}
@@ -36,8 +34,7 @@ const styles = StyleSheet.create({
   },
 
   forecastSearch: {
-
-    flex: 0.26,
+    flex: .2,
     justifyContent: "center",
     alignItems: "center",
   },
