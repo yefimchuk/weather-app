@@ -18,13 +18,18 @@ const CurrentForecast = ({ scrolling }: any) => {
   const scrollY = useRef(new Animated.Value(0)).current;
 
   const opacityTemp = scrollY.interpolate({
-    inputRange: [0, 50],
+    inputRange: [0, 100],
     outputRange: [1, 0],
     extrapolate: "clamp",
   });
+  const scaleTemp = scrollY.interpolate({
+    inputRange: [0, 50],
+    outputRange: [100, 40],
+    extrapolate: "clamp",
+  });
   const opacityHourlyForecast = scrollY.interpolate({
-    inputRange: [0, 1040],
-    outputRange: [0, -100],
+    inputRange: [0, 300],
+    outputRange: [1, 0],
     extrapolate: "clamp",
   });
   const scaleSearch = scrollY.interpolate({
@@ -32,9 +37,19 @@ const CurrentForecast = ({ scrolling }: any) => {
     outputRange: [0, -100],
     extrapolate: "clamp",
   });
+  const fontSizeCity = scrollY.interpolate({
+    inputRange: [0, 100],
+    outputRange: [65, 43],
+    extrapolate: "clamp",
+  });
   const scaleScrollView = scrollY.interpolate({
-    inputRange: [0, 230],
-    outputRange: [0, -90],
+    inputRange: [0, 200],
+    outputRange: [0, -165],
+    extrapolate: "clamp",
+  });
+  const description = scrollY.interpolate({
+    inputRange: [0, 150],
+    outputRange: [1, 0],
     extrapolate: "clamp",
   });
   return (
@@ -61,6 +76,7 @@ const CurrentForecast = ({ scrolling }: any) => {
                 <Animated.View
                   style={{
                     height: 110,
+
                     transform: [
                       {
                         translateY: scaleSearch,
@@ -68,10 +84,24 @@ const CurrentForecast = ({ scrolling }: any) => {
                     ],
                   }}
                 >
-                  <Text style={styles.currentForecast__city}>
+                  <Animated.Text
+                    style={{
+                      fontSize: fontSizeCity,
+                      fontWeight: "300",
+                      color: "#FFFFFF",
+
+                    }}
+                  >
                     {weatherData.name}
-                  </Text>
-                  <View style={styles.currentForecast__FlexRow}>
+                  </Animated.Text>
+                  <Animated.View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      opacity: description,
+                    }}
+                  >
                     <Image
                       style={styles.currentForecast__img}
                       source={{
@@ -82,14 +112,15 @@ const CurrentForecast = ({ scrolling }: any) => {
                     <Text style={styles.currentForecast__description}>
                       {currentWeatherData.weather[0].main}
                     </Text>
-                  </View>
+                  </Animated.View>
                 </Animated.View>
 
                 <Animated.ScrollView
                   style={{
                     width: "100%",
-
+                    zIndex: 10,
                     height: 200,
+
                     transform: [
                       {
                         translateY: scaleScrollView,
@@ -109,9 +140,15 @@ const CurrentForecast = ({ scrolling }: any) => {
                       opacity: opacityTemp,
                     }}
                   >
-                    <Text style={styles.currentForecast__degrees}>
+                    <Animated.Text
+                      style={{
+                        fontSize: scaleTemp,
+                        fontWeight: "200",
+                        color: "white",
+                      }}
+                    >
                       {" " + Math.round(currentWeatherData.temp) + "°"}
-                    </Text>
+                    </Animated.Text>
                     <View style={{ flexDirection: "row" }}>
                       <Text
                         style={styles.currentForecast__hl}
@@ -123,7 +160,10 @@ const CurrentForecast = ({ scrolling }: any) => {
                   </Animated.View>
 
                   <Animated.View
-                    style={{ position: "relative", top: opacityHourlyForecast }}
+                    style={{
+                      position: "relative",
+                      opacity: opacityHourlyForecast,
+                    }}
                   >
                     <HourForecast />
                   </Animated.View>
@@ -155,25 +195,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
   },
-  currentForecast__FlexRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+
   currentForecast__description: {
     color: "white",
     fontSize: 20,
   },
-  currentForecast__city: {
-    fontSize: 65,
-    fontWeight: "300",
-    color: "#FFFFFF",
-  },
-  currentForecast__degrees: {
-    fontSize: 100,
-    fontWeight: "200",
-    color: "white",
-  },
+
   currentForecast__FlexCol: {
     flexDirection: "column",
     justifyContent: "center",

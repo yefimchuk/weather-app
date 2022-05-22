@@ -1,22 +1,12 @@
 import React from "react";
-import {
-  Image,
-
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { useSelector } from "react-redux";
-import {
-  fetchDailyWeatherSelector,
-
-} from "../../BLL/Weather/weather.selector";
+import { fetchDailyWeatherSelector } from "../../BLL/Weather/weather.selector";
 import moment from "moment";
 
 const DailyForecast = () => {
   const dailyForecastData = useSelector(fetchDailyWeatherSelector);
 
-  console.log(dailyForecastData);
   return (
     <View style={styles.dailyForecastData}>
       {dailyForecastData
@@ -49,7 +39,14 @@ const DailyForecast = () => {
                     />
                   </View>
 
-                  <View style={{ flexDirection: "row", paddingRight: 10, width: 50}}>
+                  <View
+                    style={{
+                      width: 50,
+                      flexDirection: "row",
+                      paddingRight: 10,
+
+                    }}
+                  >
                     <Text style={styles.dailyForecastData__max}>
                       {Math.round(key.temp.day)}
                     </Text>
@@ -88,7 +85,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "400",
     color: "#ffffff",
-    width: 50
+    width: 50,
+    marginLeft: 10
   },
   dailyForecastData__min: {
     fontSize: 20,
@@ -101,17 +99,17 @@ const styles = StyleSheet.create({
     height: 40,
   },
   dailyForecast__day: {
-    marginLeft: 10,
+
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
-    width: "90%"
+    width: "90%",
   },
   dailyForecastData: {
     alignItems: "center",
     justifyContent: "center",
-width: "90%",
-    marginTop: 15,
+    width: "90%",
+
 
   },
 });

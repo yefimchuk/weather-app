@@ -27,7 +27,7 @@ const OtherInfo = () => {
     const pressureWeather = pressure + " pHa"
     return (<View
             style={{
-                height: 450,
+                height: 360,
                 alignItems: "center",
                 borderTopWidth: 1,
                 borderBottomWidth: 1,
