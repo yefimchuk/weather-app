@@ -1,33 +1,58 @@
-import {ImageBackground, StyleSheet} from "react-native";
-import {Provider} from "react-redux";
+import { ImageBackground, StyleSheet } from "react-native";
+import { Provider } from "react-redux";
 import store from "./BLL/store";
 // @ts-ignore
-import bgImg from "../weather-app/assets/backGround.png";
+import blueSky from "../weather-app/assets/blue-sky.jpg";
+// @ts-ignore
+import night from "../weather-app/assets/night.jpg";
+// @ts-ignore
+import sunset from "../weather-app/assets/sunset-sky.jpg";
 import axios from "axios";
-import {NavigationContainer} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
-import DailyForecast from "./UI/Components/DailyForecast";
 import CurrentForecast from "./UI/Components/CurrentForecast";
+import moment from "moment";
 
 export default function App() {
-    axios.interceptors.request.use((config) => {
-        config.baseURL = "https://api.openweathermap.org/data/2.5/";
-        config.params.appid = "0f577827aaa34d864bd29dd15ee0e2b5";
-        return config;
-    });
+  axios.interceptors.request.use((config) => {
+    config.baseURL = "https://api.openweathermap.org/data/2.5/";
+    config.params.appid = "0f577827aaa34d864bd29dd15ee0e2b5";
+    return config;
+  });
+  let imgBackground = blueSky;
+  if (
+    parseInt(moment(Date.now()).format("k")) >= 8 &&
+    parseInt(moment(Date.now()).format("k")) < 16
+  ) {
+    imgBackground = blueSky;
+  } else if (
+    parseInt(moment(Date.now()).format("k")) > 16 &&
+    parseInt(moment(Date.now()).format("k")) < 22
+  ) {
+    imgBackground = sunset;
+  } else {
+    imgBackground = night;
+  }
 
-    return (
-        <Provider store={store}>
-            <NavigationContainer>
-                <ImageBackground
-                    source={bgImg}
-                    style={{width: "100%", height: "100%"}}
-                >
-
-                    <CurrentForecast/>
-                </ImageBackground>
-            </NavigationContainer>
+  return (
+    <Provider store={store}>
+      <NavigationContainer>
+        <ImageBackground
+          source={imgBackground}
+          style={styles.bg}
+          blurRadius={5}
+        >
+          <CurrentForecast />
+        </ImageBackground>
+      </NavigationContainer>
     </Provider>
   );
 }
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  bg: {
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
+  },
+});

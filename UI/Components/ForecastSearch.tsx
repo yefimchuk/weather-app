@@ -8,7 +8,10 @@ const ForecastSearch = () => {
   const [city, SetCity] = React.useState("");
 
   const findCity = () => {
-    dispatch(fetchCoordinatesHandler(city));
+    city && (
+        dispatch(fetchCoordinatesHandler(city))
+    )
+
   };
   return (
     <View style={styles.forecastSearch}>
