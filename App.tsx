@@ -26,7 +26,7 @@ export default function App() {
   ) {
     imgBackground = blueSky;
   } else if (
-    parseInt(moment(Date.now()).format("k")) > 16 &&
+    parseInt(moment(Date.now()).format("k")) >= 16 &&
     parseInt(moment(Date.now()).format("k")) < 22
   ) {
     imgBackground = sunset;

@@ -1,7 +1,8 @@
-import React, { useRef } from "react";
-import { Animated, Image, StyleSheet, Text, View } from "react-native";
-import { useSelector } from "react-redux";
+import React, {useRef} from "react";
+import {Animated, Image, StyleSheet, Text, View} from "react-native";
+import {useSelector} from "react-redux";
 import {
+  errorMessageSelector,
   fetchCurrentWeatherSelector,
   fetchingSelector,
   fetchWeatherDataSelector,
@@ -52,6 +53,7 @@ const CurrentForecast = ({ scrolling }: any) => {
     outputRange: [1, 0],
     extrapolate: "clamp",
   });
+  const error = useSelector(errorMessageSelector)
   return (
     <View>
       <Animated.View
@@ -67,18 +69,18 @@ const CurrentForecast = ({ scrolling }: any) => {
       >
         <ForecastSearch />
       </Animated.View>
+      {error ? <Text style={{color: "white"}}>Sorry, i can't find this city. :(</Text> :
+          <View style={styles.currentForecast}>
+            {!isFetching && (
+                <View>
+                  {currentWeatherData.weather && (
+                      <View style={styles.currentForecast__FlexCol}>
+                        <Animated.View
+                            style={{
+                              height: 110,
 
-      <View style={styles.currentForecast}>
-        {!isFetching && (
-          <View>
-            {currentWeatherData.weather && (
-              <View style={styles.currentForecast__FlexCol}>
-                <Animated.View
-                  style={{
-                    height: 110,
-
-                    transform: [
-                      {
+                              transform: [
+                                {
                         translateY: scaleSearch,
                       },
                     ],
@@ -168,16 +170,16 @@ const CurrentForecast = ({ scrolling }: any) => {
                     <HourForecast />
                   </Animated.View>
 
-                  <DailyForecast />
+                  <DailyForecast/>
                   <Animated.View>
-                    <OtherInfo />
+                    <OtherInfo/>
                   </Animated.View>
                 </Animated.ScrollView>
-              </View>
+                      </View>
+                  )}
+                </View>
             )}
-          </View>
-        )}
-      </View>
+          </View>}
     </View>
   );
 };

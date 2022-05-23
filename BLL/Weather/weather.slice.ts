@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import WeatherService from "../../DAL/http/WeatherService";
 
 export const fetchCoordinatesHandler: any = createAsyncThunk(
@@ -54,7 +54,7 @@ export const weatherSlice: any = createSlice({
     },
     hourlyForecast: null,
     dailyForecast: null,
-    errorMessage: null,
+    errorMessage: "null",
   } as any,
   reducers: {},
   extraReducers: {
@@ -71,7 +71,7 @@ export const weatherSlice: any = createSlice({
     },
     [fetchWeatherByCoordinatesHandler.pending]: (state, action) => {},
     [fetchWeatherByCoordinatesHandler.fulfilled]: (state, action) => {
-
+      state.errorMessage = null
       state.isFetching = false;
       state.currentForecast = action.payload.current;
       state.hourlyForecast = action.payload.hourly;

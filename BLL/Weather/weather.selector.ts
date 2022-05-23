@@ -31,6 +31,10 @@ export const fetchingSelector = createSelector(
     selectSelf,
     (state: any) => state.weatherSlice.isFetching
 );
+export const errorMessageSelector = createSelector(
+    selectSelf,
+    (state: any) => state.weatherSlice.isFetching
+);
 
 
 
