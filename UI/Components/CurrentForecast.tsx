@@ -12,7 +12,7 @@ import HourForecast from "./HourForecast";
 import DailyForecast from "./DailyForecast";
 import OtherInfo from "./OtherInfo";
 
-const CurrentForecast = ({ scrolling }: any) => {
+const CurrentForecast = () => {
   const currentWeatherData = useSelector(fetchCurrentWeatherSelector);
   const weatherData = useSelector(fetchWeatherDataSelector);
   const isFetching = useSelector(fetchingSelector);
@@ -69,9 +69,18 @@ const CurrentForecast = ({ scrolling }: any) => {
       >
         <ForecastSearch />
       </Animated.View>
-      {isFetching? <Text>LOADING</Text> : error ? <Text style={{ textAlign: "center", color: "white" }}>
+      {isFetching ? (
+        <View style={{ alignItems: "center", width: "100%" }}>
+          <Image
+            style={{ width: 65, height: 65 }}
+            source={require("./../../assets/loader.gif")}
+          />
+        </View>
+      ) : error ? (
+        <Text style={{ textAlign: "center", color: "white" }}>
           Sorry, i can't find this city. :(
-        </Text> : (
+        </Text>
+      ) : (
         <View style={styles.currentForecast}>
           {!isFetching && (
             <View>
@@ -122,7 +131,7 @@ const CurrentForecast = ({ scrolling }: any) => {
                     style={{
                       width: "100%",
                       zIndex: 10,
-                      height: 200,
+                      flex: 1,
 
                       transform: [
                         {

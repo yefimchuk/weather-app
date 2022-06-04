@@ -1,11 +1,15 @@
 import axios from "axios";
 
+import config from "../../config";
+
+
 class WeatherService {
   FetchCoordinatesHandler(city: any) {
     return axios.get(`weather`, {
       params: {
         q: city,
         units: "metric",
+        appid: config.API_KEY
       },
     });
   }
@@ -16,8 +20,8 @@ class WeatherService {
       params: {
         lat: lat,
         lon: lon,
-
         units: "metric",
+        appid: config.API_KEY
       },
     });
   }

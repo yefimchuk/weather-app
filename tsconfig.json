@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "strict": true,
     "module": "*.png",
     "moduleResolution": "node",
     "noImplicitAny": false,
@@ -9,11 +10,12 @@
     "sourceMap": true,
     "outDir": "dist",
     "allowSyntheticDefaultImports": true,
-    "jsx": "react"
+    "jsx": "react-jsx"
   },
   "exclude": [
     "dist",
     "node_modules"
   ],
-  "extends": "expo/tsconfig.base"
+  "extends": "expo/tsconfig.base",
+  "typeRoots": ["./types"]
 }
