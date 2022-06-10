@@ -30,7 +30,7 @@ const OtherInfo = () => {
                 height: 360,
                 alignItems: "center",
                 borderTopWidth: 1,
-                borderBottomWidth: 1,
+
                 borderColor: "rgba(220,220,220,0.71)",
             }}
         >
@@ -89,6 +89,7 @@ export const ItemInfo = ({
               alignItems: "center",
               flexDirection: "row",
               width: "95%",
+              padding:2,
               borderBottomWidth: 1,
               borderColor: "rgba(220,220,220,0.71)",
           }}

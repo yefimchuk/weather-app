@@ -17,5 +17,5 @@
     "node_modules"
   ],
   "extends": "expo/tsconfig.base",
-  "typeRoots": ["./types"]
+  "typeRoots": ["./src/types"]
 }
